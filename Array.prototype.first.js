@@ -34,3 +34,5 @@ Array.prototype.first = function(fn, scope) {
         if (fn.call(scope || this, element, i, this)) {
             return element;
         }
+    }
+};
