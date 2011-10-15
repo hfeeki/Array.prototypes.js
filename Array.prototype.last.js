@@ -31,7 +31,7 @@ Array.prototype.last = function(fn, scope) {
 
     for (var i = this.length; i >= 0; i--) {
         var element = this[i];
-        if (fn.call(element, scope)) {
+        if (fn.call(scope || this, element, i, this)) {
             return element;
         }
     }

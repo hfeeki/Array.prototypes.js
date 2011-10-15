@@ -7,7 +7,7 @@
     directly above the script's code body, in all original or modified non-minified representations
 */
 
-// Takes an
+// Takes an exiting element in the array and moves it to a new position
 
 Array.prototype.move = function(from, to) {
 
