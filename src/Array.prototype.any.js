@@ -1,0 +1,1 @@
+Array.prototype.any = Array.prototype.some;
