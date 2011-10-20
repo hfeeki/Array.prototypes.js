@@ -1,3 +1,5 @@
+alert('remove prototype');
+
 /*
     Copyright (c) 2011, Chris O'Brien, prettycode.org
     http://github.com/prettycode/Array.prototypes.js
@@ -13,7 +15,7 @@ Array.prototype.move = function(from, to) {
 
     // Prototypes throw TypeErrors when the context or arguments are invalid
 
-    if (!this || Object.prototype.toString.call(arg) !== '[object Array]') {
+    if (!this || Object.prototype.toString.call(this) !== '[object Array]') {
         throw new TypeError("`this` must be Array, not " + typeof this);
     }
 

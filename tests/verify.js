@@ -2,48 +2,23 @@
 
     // Validate the context we're going to put verify.js into
 
-    if (typeof global === 'undefined') {
-        throw new TypeError('`global` closure argument is undefined');
-    }
+    (function() {
 
-    if (typeof global.verify !== 'undefined') {
-        throw new TypeError('`verify` is already defined; cannot continue loading verify.js');
-    }
+        if (typeof global === 'undefined') {
+            throw new TypeError('`global` closure argument is undefined');
+        }
 
-    if (typeof global.assert !== 'undefined') {
-        throw new TypeError('`assert` is already defined; cannot continue loading verify.js');
-    }
+        if (typeof global.verify !== 'undefined') {
+            throw new TypeError('`verify` is already defined; cannot continue loading verify.js');
+        }
+
+        if (typeof global.assert !== 'undefined') {
+            throw new TypeError('`assert` is already defined; cannot continue loading verify.js');
+        }
+
+    })();
 
     // Test result rendering function if global.verify.log isn't defined by verify.js user
-
-    var defaultCSS = {
-        "body": {
-            "white-space": "pre",
-            "font-family": "consolas,monospace",
-            "font-size": "9pt",
-            "color": "#F0F0F0",
-            "background-color": "rgb(25,25,35)",
-            "margin": "0",
-            "padding": "4px"
-        },
-        ".time": {
-            "color": "infobackground",
-            "font-size": "8.5pt"
-        },
-        ".fail": {
-            "color": "red"
-        },
-        ".pass": {
-            "color": "white"
-        }
-    };
-
-    document.head.appendChild((function() {
-        var styleTag = document.createElement("style");
-        styleTag.setAttribute("type", "text/css");
-        styleTag.innerHTML = defaultCSS;
-        return styleTag;
-    })());
 
     function logTest(assertion, msg) {
         var result = (assertion.passes) ? 'pass' : 'fail';
@@ -250,13 +225,40 @@
 
     // Add a method to import test dependencies (e.g. the sources they're testing!)
 
-    verify.require = function() {
-        Array.prototype.slice.call(arguments).forEach(function(url) {
-            var script = document.createElement("script");
-            script.src = url;
-            document.head.insertBefore(script, document.head.children[0]);
-        });
-    };
+        var requires = [];  /* a map of
+
+
+                            */
+
+        verify.require = function() {
+
+            function load(url) {
+                var script = document.createElement("script");
+                script.src = url;
+                script.onload = onload;
+                script.onerror = onerror;
+                document.head.appendChild(script);
+            }
+
+            function onload() {
+                // `this` is HTMLScriptElement
+                requires = requires.slice(requires.indexOf(this.src), 1);
+
+                if (requires.length === 0) {
+
+                }
+            }
+
+            function onerror() {
+                // `this` is HTMLScriptElement
+            }
+
+            function requiresDone
+
+            Array.prototype.slice.call(arguments).forEach(function(url) {
+                requires[url] = false;
+             });
+        };
 
     // Execute all the tests
 

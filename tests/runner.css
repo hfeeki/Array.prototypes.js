@@ -1,0 +1,22 @@
+body {
+    white-space:pre;
+    font-family:consolas,monospace;
+    font-size:9pt;
+    color:#F0F0F0;
+    background-color:rgb(25,25,35);
+    margin:0;
+    padding:4px;
+}
+
+.time {
+    color:infobackground;
+    font-size:8.5pt;
+}
+
+.fail {
+    color:red;
+}
+
+.pass {
+    color:white;
+}
