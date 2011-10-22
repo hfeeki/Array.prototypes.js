@@ -1,5 +1,3 @@
-alert('remove prototype');
-
 /*
     Copyright (c) 2011, Chris O'Brien, prettycode.org
     http://github.com/prettycode/Array.prototypes.js
@@ -26,8 +24,6 @@ Array.prototype.move = function(from, to) {
     if (typeof to !== 'number') {
         throw new TypeError("argument[1] must be number, not " + typeof to);
     }
-
-    // TODO eh? any better way?
 
     var element = this[from];
 

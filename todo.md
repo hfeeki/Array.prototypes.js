@@ -1,8 +1,9 @@
 (In loose priority order)
 
+* Modify insert() to accept an array of elements to Array.prototype.push()
 * Finish Array.prototype.remove.js
 * Write Array.prototype.shuffle.js
 * Write tests using the github.com/prettycode/verify.js testing framework
 * Normalize quotes (some files use `'`, while others use `"`)
 * Create a file with all the prototypes combined *and* refactor into cohesive "library"
-* Create a minified version of combined file
+* Create a minified version of said combined file

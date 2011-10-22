@@ -10,8 +10,6 @@
 // Inserts an element or elements at a given index
 // Example fo inserting an Array into `this` Array: [].insert(0, [[]])
 
-alert('TODO: modify insert to take array as first argument; this will push() each item in the array');
-
 Array.prototype.insert = function(index) {
 
     function isArray(instance) {
