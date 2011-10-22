@@ -10,6 +10,7 @@
 // TODO switch?
 // TODO regex?
 // TODO remove ECMAScript 5 fns
+// TODO return removed item from prototype instead?
 
 Array.prototype.remove = function(index) {
 
