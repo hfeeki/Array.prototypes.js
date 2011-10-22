@@ -18,6 +18,12 @@
 
     })();
 
+    // Gi'me some ECMAScript 5 goodness
+
+    function isArray(thing) {
+        return Object.prototype.toString.call(thing) === '[object Array]';
+    }
+
     // Test result rendering function if global.verify.log isn't defined by verify.js user
 
     function logTest(assertion, msg) {
@@ -202,28 +208,88 @@
         });
     };
 
-    // Wrapper for assert()s; catches the assertion reslts
 
-    var verify = global.verify = function(expectation, test) {
+    // The library we're exporting, yay!
+
+    global.Verify = {};
+
+    // Invoke a test; wrapper for assert()s--catches and pipes failed assertions to log
+
+    global.Verify.test = function(expectation, test) {
         try {
             test();
-            assert.fail("Nothing was asserted. A test must `assert()` at least once.");
         }
         catch(assertion) {
             assertion.test = test;
-            (verify.log || logTest)(assertion, expectation);
+            assertion.expectation = expectation;
+            (global.Verify.log || logTest)(assertion);
         }
     };
 
-    // Expose a list for consumers to add tests to
+    // Add a test to the runner queue; queue starts consuming/executing tests via global.verify.run()
 
-    verify.tests = [];
+    var testQ = [];
 
-    verify.add = function(tests) {
-        Array.prototype.splice.apply(verify.tests, [verify.tests.length, 0].concat(tests));
+    global.Verify.push = function(/* string */ moduleName, /* Array */ tests) {
+
+        // Verify arguments for public static
+
+        if (
+            arguments.length !== 2 ||
+            typeof moduleName !== 'string' ||
+            !isArray(tests)
+        ) {
+            throw new TypeError("");
+        }
+
+        // Add moduleName data to tests
+
+        for (var i = 0, l = tests.length; i < l; i++) {
+            tests[i].moduleName = moduleName;
+        }
+
+        // Add the tests to the queue
+
+        Array.prototype.splice.apply(testQ, [testQ.length, 0].concat(tests));
+    };
+
+    // Execute all the tests by emptying queue
+
+    global.Verify.run = function(/* params string "tests to load" */) {
+
+        if (
+            arguments.length > 0 &&
+            (arguments.length !== 1 || !isArray(arguments))
+        ) {
+            // TODO
+            throw new TypeError();
+        }
+
+        // Run the test (wrapper)
+
+        function run() {
+            global.Verify.testQ.forEach(function(test) {
+                global.Verify.test(test.verify, test.test);
+            });
+        }
+        // Load all requirements and execute run() when it's done
+
+        if (arguments.length) {
+            global.Verify.require.call(arguments.concat([run]));
+        }
+
+        // Or run immediately without requiring anything
+
+        else {
+            run();
+        }
     };
 
     // Add a method to import test dependencies (e.g. the sources they're testing!)
+
+    global.Verify.require = function() {
+
+    };
 
         var requires = [];  /* a map of
 
@@ -259,17 +325,5 @@
                 requires[url] = false;
              });
         };
-
-    // Execute all the tests
-
-    verify.run = function() {
-        if (arguments.length) {
-            verify.require.apply(this, arguments);
-        }
-
-        verify.tests.forEach(function(test) {
-            verify(test.verify, test.test);
-        });
-    };
 
 })(this);

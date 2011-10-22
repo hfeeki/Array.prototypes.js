@@ -1,0 +1,1 @@
+Array.prototype.all = Array.prototype.every;

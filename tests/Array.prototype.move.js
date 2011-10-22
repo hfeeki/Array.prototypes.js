@@ -1,31 +1,20 @@
-(function(tests) {
+(function(Verify) {
 
-    tests.require("../src/Array.prototype.move.js");
+    Verify.require("../src/Array.prototype.move.js");
 
     /*
 
-    // inline test execution:
+        // inline test execution:
 
-    verify.test("", function(assert) {
+        Verify.test("Throws when this is null", function(assert) {
 
-    });
+        });
 
-    // exporting tests and running suite
-
-    verify.add("name of unit being tested", [
-        {
-            verify: "test title",
-            test: function(assert) {
-
-            }
-        }
-    ]);
-
-    verify.run();
+        Verify.run();
 
     */
 
-    tests.add([
+    Verify.push("Array `remove()` prototype", [
         {
             verify: "Throws when `this` is not an Array",
             test: function() {
@@ -94,4 +83,4 @@
         }
     ]);
 
-})(verify);
+})(Verify);

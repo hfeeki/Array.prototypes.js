@@ -2,14 +2,23 @@
 <head>
     <title>Array.prototypes.js Test Runner</title>
     <link rel="stylesheet" type="text/css" href="runner.css" />
-    <script src="verify.js"></script>
+    <script src="Verify.js"></script>
 </head>
 <body>
     <script>
-        verify.run(
+        Verify.run(
             "Array.prototype.move.js",
             "Array.prototype.first.js"
         );
+        
+        /*
+        
+        Verify.run -> 
+            Verify.require([
+                "Array.prototype.move.js",
+                "Array.prototype.first.js"
+            ])
+            Verify
     </script>
 </body>
 </html>
