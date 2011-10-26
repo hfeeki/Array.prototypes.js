@@ -12,15 +12,15 @@
 
     // Test result rendering function if global.verify.log isn't defined by verify.js user
 
-    function log(assertion) {
+    function log(expectation, assertion) {
         var result = (assertion.passes) ? 'pass' : 'fail';
 
         global.document.body.innerHTML +=
-            '<assertion>' +
+            '<assertion class="' + result + '">' +
             '   <timestamp>' + new Date().getTime() + '</timestamp>' +
-            '   <outcome class="' + result + '">' + result + '</outcome>' +
-            '   <expectation class="' + result + '">' + assertion.expectation + '</expectation>' +
-            '   <data class="' + result + '">' + JSON.stringify(assertion, null, '\t') + '</data>' +
+            '   <outcome>' + result + '</outcome>' +
+            '   <expectation>' + expectation + '</expectation>' +
+            '   <data>' + JSON.stringify(assertion, null, 4) + '</data>' +
             '</assertion>'
         ;
     }
@@ -203,7 +203,7 @@
 
         // Invoke a test, catch result containing metadata about test, and log out result
 
-        test: function(expectation, test) {
+        test: function(expectation, test, moduleName) {
 
             // TODO validate args
 
@@ -211,19 +211,23 @@
                 test(assert);
                 assert().pass();
             }
-            catch(result) {
-                if (result instanceof Error) {
-                    // there's an error in the test code
-                    result = {
-                        name: result.name,
-                        message: result.message
-                    };
+            catch(error) {
+                var assertion = error;
+
+                if (error instanceof Error) {
+                    // There's an error in the test code
+
+                    assertion = {};
+                    assertion[error.name] = error.message;
+
+                    for (var key in error) {
+                        if (error.hasOwnProperty(key)) {
+                            assertion[key] = error[key];
+                        }
+                    }
                 }
 
-                result.test = test;
-                result.expectation = expectation;
-
-                (global.Verify.log || log)(result);
+                (global.Verify.log || log)(expectation, assertion);
             }
         },
 
@@ -269,17 +273,16 @@
 
             function onerror() {
                 // `this` is HTMLScriptElement
-                requiresQueue = requiresQueue.slice(requiresQueue.indexOf(this.src), 1);
                 throw new Error('Could not load required script ' + this.src);
             }
 
             urls.forEach(function(url) {
                 requiresQueue.push(url);
 
-                var script = document.createElement("script");
-                script.src = url;
+                var script = global.document.createElement("script");
                 script.onload = onload;
                 script.onerror = onerror;
+                script.src = url;
                 global.document.head.appendChild(script);
             });
         },
@@ -303,12 +306,12 @@
 
             // Poll instead of using callbacks--easier
 
-            var poll = setInterval(function() {
+            var poll = global.setInterval(function() {
                 if (requiresQueue.length > 0) {
                     return;
                 }
 
-                clearInterval(poll);
+                global.clearInterval(poll);
 
                 queuedTests.forEach(function(test) {
                     global.Verify.test(test.verify, test.test);
