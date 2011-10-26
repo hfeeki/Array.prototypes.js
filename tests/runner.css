@@ -1,22 +1,35 @@
+* {
+    padding:0;
+    margin:0;
+}
+
 body {
-    white-space:pre;
+    padding:4px;
+    background-color:rgb(25,25,35);
+}
+
+assertion {
+    display:block;
     font-family:consolas,monospace;
     font-size:9pt;
     color:#F0F0F0;
-    background-color:rgb(25,25,35);
-    margin:0;
-    padding:4px;
 }
 
-.time {
+assertion > timestamp {
     color:infobackground;
     font-size:8.5pt;
 }
 
-.fail {
+assertion > outcome.fail {
     color:red;
 }
 
-.pass {
+assertion > outcome.pass {
     color:white;
 }
+
+            '<assertion>' +=
+            '   <timestamp>' + new Date().getTime() + '</timestamp>' +=
+            '   <outcome class="' + result + '">' + result + '</outcome>' +=
+            '   <expectation>' + result + '</expectation>' +=
+            '</assertion>'

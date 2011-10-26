@@ -17,7 +17,7 @@
     Verify.push("Array `remove()` prototype", [
         {
             verify: "Throws when `this` is not an Array",
-            test: function() {
+            test: function(assert) {
                 var foo;
 
                 assert(function() {
@@ -51,20 +51,20 @@
         },
         {
             verify: "Returns `this` Array it acts on",
-            test: function() {
+            test: function(assert) {
                 var array = [1, "<", 2];
                 assert(array.move(0, 1)).is(array);
             }
         },
         {
             verify: "TODO: What happens when I do this? Does this pass? Should it throw when from === to?",
-            test: function() {
+            test: function(assert) {
                 assert(["a"].move(0, 0)).defined();
             }
         },
         {
             verify: "Relocates element to new index",
-            test: function() {
+            test: function(assert) {
                 assert(
                     [
                         "chris",
