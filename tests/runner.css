@@ -18,22 +18,25 @@ assertion {
 assertion > timestamp {
     color:infobackground;
     font-size:8.5pt;
-}
-
-assertion > data.pass {
     display:none;
 }
 
-assertion > data.fail {
-    display:block;
-    white-space:pre;
-    padding-left:10px;
+assertion.pass > data {
+    display:none;
 }
 
-assertion > outcome.fail {
+assertion.fail > data {
+    display:block;
+    white-space:pre;
+    border-left:1px dotted red;
+    padding-left:5px;
+    margin:5px 0 5px 15px;
+}
+
+assertion.fail > outcome {
     color:red;
 }
 
-assertion > outcome.pass {
+assertion.pass > outcome {
     color:white;
 }
