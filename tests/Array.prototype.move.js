@@ -74,7 +74,7 @@
                     .move(0, 2)
                     .move(1, 0)
                 )
-                .identical([
+                .identicalTo([
                     "lola",
                     "farah",
                     "chris"

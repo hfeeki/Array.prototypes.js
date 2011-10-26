@@ -19,7 +19,8 @@
             '<assertion>' +
             '   <timestamp>' + new Date().getTime() + '</timestamp>' +
             '   <outcome class="' + result + '">' + result + '</outcome>' +
-            '   <expectation>' + assertion.expectation + '</expectation>' +
+            '   <expectation class="' + result + '">' + assertion.expectation + '</expectation>' +
+            '   <data class="' + result + '">' + JSON.stringify(assertion, null, '\t') + '</data>' +
             '</assertion>'
         ;
     }
@@ -211,8 +212,17 @@
                 assert().pass();
             }
             catch(result) {
+                if (result instanceof Error) {
+                    // there's an error in the test code
+                    result = {
+                        name: result.name,
+                        message: result.message
+                    };
+                }
+
                 result.test = test;
                 result.expectation = expectation;
+
                 (global.Verify.log || log)(result);
             }
         },
