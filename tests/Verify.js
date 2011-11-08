@@ -62,7 +62,9 @@
                         }
                     }
 
-                    return orderedObject.sort();
+                    return orderedObject.sort(function(a, b) {
+                        return a.key > b.key;
+                    });
                 }
 
                 throw {
@@ -266,23 +268,20 @@
                 urls = [urls];
             }
 
-            function onload() {
-                // `this` is HTMLScriptElement
-                requiresQueue = requiresQueue.slice(requiresQueue.indexOf(this.src), 1);
-            }
-
-            function onerror() {
-                // `this` is HTMLScriptElement
-                throw new Error('Could not load required script ' + this.src);
-            }
-
             urls.forEach(function(url) {
                 requiresQueue.push(url);
 
                 var script = global.document.createElement("script");
-                script.onload = onload;
-                script.onerror = onerror;
+
+                script.onload = function() {
+                    requiresQueue.splice(requiresQueue.indexOf(url), 1);
+                };
+                script.onerror = function() {
+                    this.onload.apply(this, arguments);
+                    throw new Error('Could not load required script ' + this.src);
+                };
                 script.src = url;
+
                 global.document.head.appendChild(script);
             });
         },
@@ -310,6 +309,8 @@
                 if (requiresQueue.length > 0) {
                     return;
                 }
+
+                console.log('running tests ' + queuedTests.length);
 
                 global.clearInterval(poll);
 
