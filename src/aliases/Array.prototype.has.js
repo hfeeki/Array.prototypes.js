@@ -1,1 +1,0 @@
-Array.prototype.has = Array.prototype.some;
