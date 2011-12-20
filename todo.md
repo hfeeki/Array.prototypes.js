@@ -2,6 +2,7 @@
 
 * Array.prototype.intersect.js
 * Array.prototype.same.js
+* Array.prototype.swap.js
 * Modify insert() to accept an array of elements to Array.prototype.push()
 * Finish Array.prototype.remove.js
 * Write tests using the Verify.js testing framework
