@@ -10,21 +10,6 @@
         return Object.prototype.toString.call(thing) === '[object Array]';
     }
 
-    // Test result rendering function if global.verify.log isn't defined by verify.js user
-
-    function log(expectation, assertion) {
-        var result = (assertion.passes) ? 'pass' : 'fail';
-
-        global.document.body.innerHTML +=
-            '<assertion class="' + result + '">' +
-            '   <timestamp>' + new Date().getTime() + '</timestamp>' +
-            '   <outcome>' + result + '</outcome>' +
-            '   <expectation>' + expectation + '</expectation>' +
-            '   <data>' + JSON.stringify(assertion, null, 4) + '</data>' +
-            '</assertion>'
-        ;
-    }
-
     // Called within global.verify() by verify.js user; creates test functions for the context
 
     function assert(source) {
@@ -196,6 +181,21 @@
 
     if (typeof global.Verify !== 'undefined') {
         throw new TypeError('`Verify` is already defined; cannot continue loading Verify.js');
+    }
+
+    // Test result rendering function if global.verify.log isn't defined by verify.js user
+
+    function log(expectation, assertion) {
+        var result = (assertion.passes) ? 'pass' : 'fail';
+
+        global.document.body.innerHTML +=
+            '<assertion class="' + result + '">' +
+            '   <timestamp>' + new Date().getTime() + '</timestamp>' +
+            '   <outcome>' + result + '</outcome>' +
+            '   <expectation>' + expectation + '</expectation>' +
+            '   <data>' + JSON.stringify(assertion, null, 4) + '</data>' +
+            '</assertion>'
+        ;
     }
 
     var queuedTests = [],
