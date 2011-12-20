@@ -1,6 +1,5 @@
 (In loose priority order)
 
-* Delete /src/aliases/all.js
 * Modify insert() to accept an array of elements to Array.prototype.push()
 * Finish Array.prototype.remove.js
 * Write tests using the github.com/prettycode/verify.js testing framework
