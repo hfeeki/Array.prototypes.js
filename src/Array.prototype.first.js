@@ -9,7 +9,7 @@
 
 // Returns first element in array, or first element that matches a predicate fn
 
-Array.prototype.first = function(fn, scope) {
+Array.prototype.first = function(fn) {
 
     // Prototypes throw TypeErrors when the context or arguments are invalid
 
@@ -31,7 +31,7 @@ Array.prototype.first = function(fn, scope) {
 
     for (var i = 0, l = this.length; i < l; i++) {
         var element = this[i];
-        if (fn.call(scope || this, element, i, this)) {
+        if (fn.call(this, element, i, this)) {
             return element;
         }
     }
