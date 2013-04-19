@@ -18,7 +18,7 @@ Array.prototype.insert = function(index) {
 
     // Prototypes throw TypeErrors when the context or arguments are invalid
 
-    if (!this || !isArray(this)) {
+    if (!isArray(this)) {
         throw new TypeError("`this` must be Array, not " + typeof this);
     }
 
