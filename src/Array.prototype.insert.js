@@ -1,12 +1,3 @@
-/*
-    Copyright (c) 2011, Chris O'Brien, prettycode.org
-    http://github.com/prettycode/Array.prototypes.js
-
-    Permission is hereby granted for unrestricted use, modification, and redistribution of this
-    script, only under the condition that this code comment is kept wholly complete, appearing
-    directly above the script's code body, in all original or modified non-minified representations
-*/
-
 // Inserts an element or elements at a given index
 // Example fo inserting an Array into `this` Array: [].insert(0, [[]])
 
