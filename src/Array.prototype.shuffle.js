@@ -27,4 +27,4 @@ Array.prototype.shuffle = function() {
 	}
 
 	return this;
-};
+}; 
