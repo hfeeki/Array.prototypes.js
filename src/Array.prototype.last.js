@@ -20,7 +20,7 @@ Array.prototype.last = function(fn, scope) {
         throw new TypeError("Optional argument[0] must be predicate function if defined");
     }
 
-    for (var i = this.length; i >= 0; i--) {
+    for (var i = this.length - 1; i >= 0; i--) {
         var element = this[i];
         if (fn.call(scope || this, element, i, this)) {
             return element;
