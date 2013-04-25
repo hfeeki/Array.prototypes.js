@@ -10,21 +10,21 @@ Array.prototype.shuffle = function() {
 
     // No shuffle necessary
 
-	var length = this.length;
+    var length = this.length;
 
-	if (length <= 1) {
-		return this;
-	}
+    if (length <= 1) {
+        return this;
+    }
 
     // Fisher–Yates implementation ("gold standard" of shuffles)
 
-	for (var i = this.length - 1; i; i--) {
-		var randomIndex = Math.floor(Math.random() * (i - 1)),
-			temp = this[i];
+    for (var i = this.length - 1; i; i--) {
+        var randomIndex = Math.floor(Math.random() * (i - 1)),
+            temp = this[i];
 
-		this[i] = this[randomIndex];
-		this[randomIndex] = temp;
-	}
+        this[i] = this[randomIndex];
+        this[randomIndex] = temp;
+    }
 
-	return this;
+    return this;
 };
