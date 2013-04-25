@@ -11,7 +11,7 @@ Array.prototype.last = function(fn, scope) {
     // No predicate? Return last element
 
     if (typeof fn === 'undefined') {
-        return this[this.length];
+        return this[this.length - 1];
     }
 
     // Return last element that meets predicate
