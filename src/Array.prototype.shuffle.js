@@ -18,7 +18,7 @@ Array.prototype.shuffle = function() {
 
     // Fisher–Yates implementation ("gold standard" of shuffles)
 
-    for (var i = this.length - 1; i; i--) {
+    for (var i = length - 1; i; i--) {
         var randomIndex = Math.floor(Math.random() * (i - 1)),
             temp = this[i];
 
