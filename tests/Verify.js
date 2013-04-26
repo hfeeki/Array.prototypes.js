@@ -61,12 +61,12 @@
                 };
             },
             greaterThan: function(target) {
-                throw new assertion({
+                throw {
                     passes: source > target,
                     source: source,
                     target: target,
                     assert: 'greaterThan'
-                });
+                };
             },
             lessThan: function(target) {
                 throw {
