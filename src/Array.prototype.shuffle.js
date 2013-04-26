@@ -8,6 +8,8 @@ Array.prototype.shuffle = function() {
         throw new TypeError("`this` must be Array, not " + typeof this);
     }
     
+    var length = this.length;
+    
     // Fisher–Yates implementation ("gold standard" of shuffles)
 
     for (var i = length - 1; i >= 0; i--) {
