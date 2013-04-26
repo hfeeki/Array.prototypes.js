@@ -3,6 +3,7 @@
 * Array.prototype.intersect.js
 * Array.prototype.same.js
 * Array.prototype.remove.js
+* Add support for scope argument to Array.prototype.first
 * Fix space/tab formatting in Array.prototype.shuffle.js
 * Modify insert() to accept an array of elements to Array.prototype.push()
 * Finish Array.prototype.remove.js
