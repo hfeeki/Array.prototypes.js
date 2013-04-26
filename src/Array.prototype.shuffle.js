@@ -22,3 +22,5 @@ Array.prototype.shuffle = function() {
 
     return this;
 };
+
+// http://jsfiddle.net/dCaHB/
