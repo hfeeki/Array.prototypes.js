@@ -2,5 +2,5 @@
 // Example: [[0,1],[2,3],[4,5]].flatten() -> [0,1,2,3,4,5]
 
 Array.prototype.flatten = function() {
-    return [].concat.apply([], this);
+    return Array.prototype.concat.apply([], this);
 };
