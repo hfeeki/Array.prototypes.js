@@ -7,15 +7,7 @@ Array.prototype.shuffle = function() {
     if (Object.prototype.toString.call(this) !== '[object Array]') {
         throw new TypeError("`this` must be Array, not " + typeof this);
     }
-
-    // No shuffle necessary
-
-    var length = this.length;
-
-    if (length <= 1) {
-        return this;
-    }
-
+    
     // Fisher–Yates implementation ("gold standard" of shuffles)
 
     for (var i = length - 1; i >= 0; i--) {
