@@ -1,12 +1,7 @@
 // Returns a single Array of elements from a given array of arrays
+// Example: [[0,1],[2,3],[4,5]].flatten() -> [0,1,2,3,4,5]
 
 Array.prototype.flatten = function() {
-
-    // Prototypes throw TypeErrors when the context or arguments are invalid
-
-    if (Object.prototype.toString.call(this) !== '[object Array]') {
-        throw new TypeError("`this` must be Array, not " + typeof this);
-    }
-
     return [].concat.apply([], this);
 };
+
