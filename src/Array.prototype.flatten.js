@@ -8,11 +8,5 @@ Array.prototype.flatten = function() {
         throw new TypeError("`this` must be Array, not " + typeof this);
     }
 
-    var flattened = [];
-
-    for (var i = 0, l = this.length; i < l; i++) {
-        flattened = flattened.concat(this[i]);
-    }
-
-    return flattened;
+    return Array.prototype.concat.apply([], this);
 };
