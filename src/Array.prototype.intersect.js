@@ -1,4 +1,4 @@
-// Returns last element in array, or last element that matches a predicate fn
+// Returns TODO
 
 Array.prototype.intersect = function(fn, scope) {
 
@@ -9,5 +9,4 @@ Array.prototype.intersect = function(fn, scope) {
     }
 
     // TODO
-
 };
