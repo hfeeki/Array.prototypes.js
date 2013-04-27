@@ -8,5 +8,5 @@ Array.prototype.random = function() {
         throw new TypeError("`this` must be Array, not " + typeof this);
     }
 
-    return this[Math.floor(Math.random() * (this.length + 1))];
+    return this[Math.floor(Math.random() * this.length)];
 };
